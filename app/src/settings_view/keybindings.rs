@@ -1112,11 +1112,7 @@ impl SettingsWidget for KeybindingsWidget {
             None
         };
 
-        let subheader = render_sub_header(
-            appearance,
-            "配置快捷键",
-            local_only_icon_state,
-        );
+        let subheader = render_sub_header(appearance, "配置快捷键", local_only_icon_state);
         let description = self.render_description(view.bindings.as_ref(), appearance);
 
         Flex::column()
