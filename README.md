@@ -77,6 +77,8 @@ git rebase upstream/master
 
 Windows 安装包由 Windows 环境或 CI 构建，不建议把 WSL 中的 Linux 构建产物当作 Windows 客户端使用。
 
+每次推送到 `cn/main` 的中文化改动，都会通过 GitHub Actions 在 Windows 环境执行 Rust 格式检查与 Warp 客户端库编译检查；该流程不发布安装包，也不需要任何第三方模型密钥。
+
 ## 贡献中文文案
 
 欢迎提交文案问题或改进建议。请在提交前说明：
