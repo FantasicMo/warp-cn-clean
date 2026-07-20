@@ -32,7 +32,7 @@ mod style;
 use rule::*;
 use rule_editor::*;
 
-const OFFLINE_TEXT: &str = "You are offline. Some rules will be read only.";
+const OFFLINE_TEXT: &str = "当前处于离线状态，部分规则仅可查看。";
 
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq)]
 pub enum AIFactPage {
