@@ -449,11 +449,11 @@ pub fn render_permissions_section(
     let ai_settings = AISettings::as_ref(app);
     let mut column = Flex::column().with_children([
         render_separator(appearance),
-        render_section_label("PERMISSIONS", appearance),
+        render_section_label("权限", appearance),
         render_permission_row(
             appearance,
             Icon::Code2,
-            "Apply code diffs",
+            "应用代码差异",
             &view.apply_code_diffs_dropdown,
             profile_data.apply_code_diffs.description(),
             !ai_settings.is_code_diffs_permissions_editable(app),
@@ -464,7 +464,7 @@ pub fn render_permissions_section(
         render_permission_row(
             appearance,
             Icon::Notebook,
-            "Read files",
+            "读取文件",
             &view.read_files_dropdown,
             profile_data.read_files.description(),
             !ai_settings.is_read_files_permissions_editable(app),
@@ -488,7 +488,7 @@ pub fn render_permissions_section(
     column.add_child(render_permission_row(
         appearance,
         Icon::Terminal,
-        "Execute commands",
+        "执行命令",
         &view.execute_commands_dropdown,
         profile_data.execute_commands.description(),
         !ai_settings.is_execute_commands_permissions_editable(app),
@@ -525,7 +525,7 @@ pub fn render_permissions_section(
     column.add_child(render_permission_row(
         appearance,
         Icon::Workflow,
-        "Interact with running commands",
+        "与运行中的命令交互",
         &view.write_to_pty_dropdown,
         profile_data.write_to_pty.description(),
         !ai_settings.is_write_to_pty_permissions_editable(app),
@@ -538,7 +538,7 @@ pub fn render_permissions_section(
         column.add_child(render_permission_row(
             appearance,
             Icon::Laptop,
-            "Computer use",
+            "计算机操作",
             &view.computer_use_dropdown,
             profile_data.computer_use.description(),
             !ai_settings.is_computer_use_permissions_editable(app),
@@ -551,7 +551,7 @@ pub fn render_permissions_section(
     column.add_child(render_permission_row(
         appearance,
         Icon::MessageText,
-        "Ask questions",
+        "提出问题",
         &view.ask_user_question_dropdown,
         profile_data.ask_user_question.description(),
         !ai_settings.is_ask_user_question_permissions_editable(app),
@@ -562,7 +562,7 @@ pub fn render_permissions_section(
     column.add_child(render_permission_row(
         appearance,
         Icon::Atom,
-        "Run orchestrated agents",
+        "运行子智能体",
         &view.run_agents_dropdown,
         profile_data.run_agents.description(),
         !ai_settings.is_run_agents_permissions_editable(app),
@@ -574,7 +574,7 @@ pub fn render_permissions_section(
     column.add_child(render_permission_row(
         appearance,
         Icon::Dataflow,
-        "Call MCP servers",
+        "调用 MCP 服务器",
         &view.call_mcp_servers_dropdown,
         profile_data.mcp_permissions.description(),
         !ai_settings.is_mcp_permission_editable(app), // Use MCP override for this permission
@@ -721,8 +721,8 @@ fn render_directory_allowlist_section(
     let is_editable = ai_settings.is_directory_allowlist_editable(app);
 
     render_list_section(
-        "Directory allowlist",
-        "Give the agent file access to certain directories.",
+        "目录允许列表",
+        "允许智能体访问指定目录中的文件。",
         &profile_data.directory_allowlist,
         &view.directory_allowlist_mouse_state_handles,
         Some(&view.directory_allowlist_editor),
@@ -746,8 +746,8 @@ fn render_command_allowlist_section(
     let is_editable = ai_settings.is_command_allowlist_editable(app);
 
     render_list_section(
-        "Command allowlist",
-        "Regular expressions to match commands that can be automatically executed by Oz.",
+        "命令允许列表",
+        "用于匹配 Warp Agent 可以自动执行命令的正则表达式。",
         &profile_data.command_allowlist,
         &view.command_allowlist_mouse_state_handles,
         Some(&view.command_allowlist_editor),
@@ -812,8 +812,8 @@ fn render_command_denylist_section(
     );
 
     let mut column = Flex::column().with_child(create_section_header(
-        "Command denylist",
-        "Regular expressions to match commands that Oz should always ask permission to execute.",
+        "命令拒绝列表",
+        "用于匹配 Warp Agent 始终需要请求许可后才能执行的命令的正则表达式。",
         appearance,
     ));
     column = column.with_child(list);
@@ -840,8 +840,8 @@ fn render_mcp_allowlist_section(
     let is_editable = ai_settings.is_mcp_permission_editable(app);
 
     render_list_section(
-        "MCP allowlist",
-        "MCP servers that are allowed to be called by Oz.",
+        "MCP 允许列表",
+        "允许 Warp Agent 调用的 MCP 服务器。",
         &profile_data.mcp_allowlist,
         &view.mcp_allowlist_mouse_state_handles,
         None,
@@ -866,8 +866,8 @@ fn render_mcp_denylist_section(
     let is_editable = ai_settings.is_mcp_permission_editable(app);
 
     render_list_section(
-        "MCP denylist",
-        "MCP servers that are not allowed to be called by Oz.",
+        "MCP 拒绝列表",
+        "禁止 Warp Agent 调用的 MCP 服务器。",
         &profile_data.mcp_denylist,
         &view.mcp_denylist_mouse_state_handles,
         None,
@@ -900,17 +900,12 @@ pub fn render_plan_auto_sync_toggle(
     .with_margin_right(8.)
     .finish();
 
-    let label_elem = Text::new(
-        "Plan auto-sync".to_string(),
-        appearance.ui_font_family(),
-        13.,
-    )
-    .with_color(appearance.theme().active_ui_text_color().into())
-    .finish();
+    let label_elem = Text::new("计划自动同步".to_string(), appearance.ui_font_family(), 13.)
+        .with_color(appearance.theme().active_ui_text_color().into())
+        .finish();
 
     let desc_elem = Text::new(
-        "The plans this agent creates will be automatically added and synced to Warp Drive."
-            .to_string(),
+        "该智能体创建的计划会自动添加并同步到 Warp Drive。".to_string(),
         appearance.ui_font_family(),
         11.,
     )
@@ -974,16 +969,12 @@ pub fn render_web_search_toggle(
     .with_margin_right(8.)
     .finish();
 
-    let label_elem = Text::new(
-        "Call web tools".to_string(),
-        appearance.ui_font_family(),
-        13.,
-    )
-    .with_color(appearance.theme().active_ui_text_color().into())
-    .finish();
+    let label_elem = Text::new("调用网页工具".to_string(), appearance.ui_font_family(), 13.)
+        .with_color(appearance.theme().active_ui_text_color().into())
+        .finish();
 
     let desc_elem = Text::new(
-        "The agent may use web search when helpful for completing tasks.".to_string(),
+        "智能体会在有助于完成任务时使用网络搜索。".to_string(),
         appearance.ui_font_family(),
         11.,
     )

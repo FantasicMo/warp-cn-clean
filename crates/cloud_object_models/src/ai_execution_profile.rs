@@ -31,14 +31,10 @@ impl ActionPermission {
     pub fn description(&self) -> &'static str {
         match self {
             ActionPermission::AgentDecides | ActionPermission::Unknown => {
-                "The Agent chooses the safest path: acting on its own when confident, and asking for approval when uncertain."
+                "智能体会选择更稳妥的方式：有把握时自行执行，不确定时请求你的批准。"
             }
-            ActionPermission::AlwaysAllow => {
-                "Give the Agent full autonomy  — no manual approval ever required."
-            }
-            ActionPermission::AlwaysAsk => {
-                "Require explicit approval before the Agent takes any action."
-            }
+            ActionPermission::AlwaysAllow => "授予智能体完全自主权，无需任何人工批准。",
+            ActionPermission::AlwaysAsk => "智能体执行任何操作前都必须获得你的明确批准。",
         }
     }
 
@@ -69,11 +65,9 @@ impl WriteToPtyPermission {
         match self {
             WriteToPtyPermission::AlwaysAllow => ActionPermission::AlwaysAllow.description(),
             WriteToPtyPermission::AskOnFirstWrite => {
-                "The agent will ask for permission the first time it needs to interact with a running command. After that, it will continue automatically for the rest of that command."
+                "智能体首次需要与运行中的命令交互时会请求许可；此后会在该命令余下的运行期间自动继续。"
             }
-            WriteToPtyPermission::AlwaysAsk => {
-                "The agent will always ask for permission to interact with a running command."
-            }
+            WriteToPtyPermission::AlwaysAsk => "智能体每次与运行中的命令交互前都会请求许可。",
             WriteToPtyPermission::Unknown => ActionPermission::Unknown.description(),
         }
     }
@@ -97,16 +91,10 @@ pub enum ComputerUsePermission {
 impl ComputerUsePermission {
     pub fn description(&self) -> &'static str {
         match self {
-            ComputerUsePermission::Never => {
-                "Computer use tools are disabled and will not be available to the Agent."
-            }
-            ComputerUsePermission::AlwaysAsk => {
-                "Require explicit approval before the Agent uses computer use tools."
-            }
-            ComputerUsePermission::AlwaysAllow => {
-                "Give the Agent full autonomy to use computer use tools without approval."
-            }
-            ComputerUsePermission::Unknown => "Unknown setting.",
+            ComputerUsePermission::Never => "计算机操作工具已关闭，智能体无法使用。",
+            ComputerUsePermission::AlwaysAsk => "智能体使用计算机操作工具前必须获得你的明确批准。",
+            ComputerUsePermission::AlwaysAllow => "允许智能体无需批准即可自主使用计算机操作工具。",
+            ComputerUsePermission::Unknown => "未知设置。",
         }
     }
 
@@ -134,16 +122,10 @@ pub enum RunAgentsPermission {
 impl RunAgentsPermission {
     pub fn description(&self) -> &'static str {
         match self {
-            RunAgentsPermission::NeverAllow => {
-                "The Agent cannot run child agents and the run_agents tool will not be available."
-            }
-            RunAgentsPermission::AlwaysAllow => {
-                "Give the Agent full autonomy to run child agents without approval."
-            }
-            RunAgentsPermission::AlwaysAsk => {
-                "Require explicit approval before the Agent runs child agents."
-            }
-            RunAgentsPermission::Unknown => "Unknown setting.",
+            RunAgentsPermission::NeverAllow => "智能体无法运行子智能体，且 run_agents 工具不可用。",
+            RunAgentsPermission::AlwaysAllow => "允许智能体无需批准即可自主运行子智能体。",
+            RunAgentsPermission::AlwaysAsk => "智能体运行子智能体前必须获得你的明确批准。",
+            RunAgentsPermission::Unknown => "未知设置。",
         }
     }
 
@@ -178,11 +160,9 @@ pub enum AskUserQuestionPermission {
 impl AskUserQuestionPermission {
     pub fn label(&self) -> &'static str {
         match self {
-            AskUserQuestionPermission::Never => "Never ask",
-            AskUserQuestionPermission::AskExceptInAutoApprove => "Ask unless auto-approve",
-            AskUserQuestionPermission::AlwaysAsk | AskUserQuestionPermission::Unknown => {
-                "Always ask"
-            }
+            AskUserQuestionPermission::Never => "从不提问",
+            AskUserQuestionPermission::AskExceptInAutoApprove => "自动批准时不提问",
+            AskUserQuestionPermission::AlwaysAsk | AskUserQuestionPermission::Unknown => "始终提问",
         }
     }
 
@@ -190,13 +170,11 @@ impl AskUserQuestionPermission {
         match self {
             AskUserQuestionPermission::AskExceptInAutoApprove
             | AskUserQuestionPermission::Unknown => {
-                "The Agent may ask a question and pause for your response, but will continue automatically when auto-approve is on."
+                "智能体可以提出问题并暂停等待你的回复；开启自动批准时会自动继续。"
             }
-            AskUserQuestionPermission::Never => {
-                "The Agent will not ask questions and will continue with its best judgment."
-            }
+            AskUserQuestionPermission::Never => "智能体不会提问，而是依照其最佳判断继续执行。",
             AskUserQuestionPermission::AlwaysAsk => {
-                "The Agent may ask a question and will pause for your response even when auto-approve is on."
+                "智能体可以提出问题，即使开启自动批准也会暂停等待你的回复。"
             }
         }
     }
